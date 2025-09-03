@@ -17,12 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
       Object.entries(activities).forEach(([name, details]) => {
         const activityCard = document.createElement("div");
         activityCard.className = "activity-card";
-        activityCard.style.border = "1px solid #ddd";
-        activityCard.style.borderRadius = "8px";
-        activityCard.style.padding = "16px";
-        activityCard.style.marginBottom = "20px";
-        activityCard.style.background = "#fafbfc";
-        activityCard.style.boxShadow = "0 2px 8px rgba(0,0,0,0.04)";
 
         const spotsLeft = details.max_participants - details.participants.length;
 
@@ -30,23 +24,23 @@ document.addEventListener("DOMContentLoaded", () => {
         let participantsSection = "";
         if (details.participants.length > 0) {
           participantsSection = `
-            <div style="margin-top: 12px;">
+            <section class="participants-section">
               <strong>Participants:</strong>
-              <ul style="margin: 8px 0 0 18px; padding: 0;">
-                ${details.participants.map(p => `<li style="margin-bottom: 2px;">${p}</li>`).join("")}
+              <ul>
+                ${details.participants.map(p => `<li>${p}</li>`).join("")}
               </ul>
-            </div>
+            </section>
           `;
         } else {
           participantsSection = `
-            <div style="margin-top: 12px; color: #888;">
+            <section class="participants-section empty">
               <strong>Participants:</strong> <span>No one has signed up yet.</span>
-            </div>
+            </section>
           `;
         }
 
         activityCard.innerHTML = `
-          <h4 style="margin-top: 0; color: #2c3e50;">${name}</h4>
+          <h4 class="activity-title">${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
@@ -103,9 +97,9 @@ document.addEventListener("DOMContentLoaded", () => {
       messageDiv.textContent = "Failed to sign up. Please try again.";
       messageDiv.className = "error";
       messageDiv.classList.remove("hidden");
-      console.error("Error signing up:", error);
-    }
-  });
+    console.error("Error signing up:", error);
+  }
+});
 
   // Initialize app
   fetchActivities();
