@@ -20,11 +20,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const spotsLeft = details.max_participants - details.participants.length;
 
+        // Participants section
+        let participantsSection = "";
+        if (details.participants.length > 0) {
+          participantsSection = `
+            <section class="participants-section">
+              <strong>Participants:</strong>
+              <ul>
+                ${details.participants.map(p => `<li>${p}</li>`).join("")}
+              </ul>
+            </section>
+          `;
+        } else {
+          participantsSection = `
+            <section class="participants-section empty">
+              <strong>Participants:</strong> <span>No one has signed up yet.</span>
+            </section>
+          `;
+        }
+
         activityCard.innerHTML = `
-          <h4>${name}</h4>
+          <h4 class="activity-title">${name}</h4>
           <p>${details.description}</p>
           <p><strong>Schedule:</strong> ${details.schedule}</p>
           <p><strong>Availability:</strong> ${spotsLeft} spots left</p>
+          ${participantsSection}
         `;
 
         activitiesList.appendChild(activityCard);
@@ -77,9 +97,9 @@ document.addEventListener("DOMContentLoaded", () => {
       messageDiv.textContent = "Failed to sign up. Please try again.";
       messageDiv.className = "error";
       messageDiv.classList.remove("hidden");
-      console.error("Error signing up:", error);
-    }
-  });
+    console.error("Error signing up:", error);
+  }
+});
 
   // Initialize app
   fetchActivities();
