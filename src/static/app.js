@@ -6,15 +6,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const messageDiv = document.getElementById("message");
 
   // Debug code
-  let counter = 0;
+  // let counter = 0;
 
   // Function to fetch activities from API
   async function fetchActivities() {
-    counter += 1;
-    console.log("Fetch activities called " + counter + " times");
     try {
+
+      /*counter += 1;
+      console.log("Fetch activities called " + counter + " times");
       activitiesList.innerHTML = "<p>Loading activities...</p>";
-      activitySelect.innerHTML = '<option value="" disabled selected>Select an activity</option>';
+      activitySelect.innerHTML = '<option value="" disabled selected>Select an activity</option>';*/
 
       const response = await fetch("/activities");
       const activities = await response.json();
@@ -114,7 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Handle form submission
   signupForm.addEventListener("submit", async (event) => {
-  console.log("Signup form submit handler triggered");
+  // console.log("Signup form submit handler triggered");
     event.preventDefault();
 
     const email = document.getElementById("email").value;
